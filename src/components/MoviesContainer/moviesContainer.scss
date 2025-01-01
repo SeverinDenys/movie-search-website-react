@@ -1,0 +1,39 @@
+.movie-container {
+  text-align: center;
+  background-color: beige;
+  margin: 2rem 0;
+  padding: 2rem 0;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+
+  img {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+
+  input {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    padding: 1rem 1rem;
+    padding-left: 30px;
+    width: 60%;
+    &::placeholder {
+      text-align: center;
+    }
+  }
+
+  button {
+    padding: 1rem 1rem;
+  }
+}

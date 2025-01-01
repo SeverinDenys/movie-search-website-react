@@ -1,9 +1,10 @@
-import React from 'react'
-
 const Header = () => {
   return (
-    <div>Header</div>
-  )
-}
+    <header>
+      <h1>Find your film</h1>
+      <button>My Watchlist</button>
+    </header>
+  );
+};
 
-export default Header
+export default Header;
