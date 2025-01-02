@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import Movie from "../Movie/Movie";
+import Input from "./Input";
 
 const MoviesContainer = () => {
-  const [movies, setMovies] = useState([]);
-  const [movieDetails, setMoviesDetails] = useState([]);
+  const [moviesList, setMoviesList] = useState([]);
+  const [movieDetails, setMovieDetails] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
   const fetchMoviesData = async () => {
@@ -16,8 +18,12 @@ const MoviesContainer = () => {
       }
 
       const data = await response.json();
-      console.log("data", data);
-      setMovies(data.Search || []); // Ensure you have an array even if no results
+      setMoviesList(data.Search || []); // Ensure you have an array even if no results
+
+      // Fetch detailed info for each movie and pass to another fetching function
+      if (data.Search) {
+        fetchMoviesDetails(data.Search);
+      }
 
       setInputValue("");
     } catch (error) {
@@ -28,30 +34,28 @@ const MoviesContainer = () => {
     }
   };
 
-  const fetchMoviesDetails = async () => {
-    try {
-      const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
-      const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&t=${inputValue}`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not okay");
-      }
+  const fetchMoviesDetails = async (moviesArray) => {
+    const detailedMovies = await Promise.all(
+      moviesArray.map(async (movie) => {
+        const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
+        const response = await fetch(
+          `http://www.omdbapi.com/?apikey=${apiKey}&t=${movie.Title}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not okay");
+        }
 
-      const dataDetails = await response.json();
-      console.log("data", dataDetails);
-      setMoviesDetails(dataDetails.Search || []); // Ensure you have an array even if no results
-    } catch (error) {
-      console.error(
-        "There was a problem with the fetch operation:",
-        error
-      );
-    }
+        const data = await response.json();
+        return data;
+      })
+    );
+
+    // Set the movie details
+    setMovieDetails(detailedMovies);
   };
 
   useEffect(() => {
     fetchMoviesData();
-    fetchMoviesDetails();
   }, []);
 
   const handleInputValue = (e) => {
@@ -60,27 +64,13 @@ const MoviesContainer = () => {
 
   return (
     <>
-      <div>
-        <div className="input-container">
-          <img src="/src/images/searchIcon.png" alt="search icon" />
-          <input
-            type="text"
-            placeholder="Search for a movie"
-            value={inputValue}
-            onChange={handleInputValue}
-          />
-          <button onClick={() => fetchMoviesData()}>Search</button>
-        </div>
-      </div>
+      <Input
+        inputValue={inputValue}
+        handleInputValue={handleInputValue}
+        fetchMoviesData={fetchMoviesData}
+      />
 
-      {movies.map((movie, index) => (
-        <div key={index} className="movie-container">
-          <div className="img-holder">
-            <img src={movie.Poster} alt="movie image" />
-          </div>
-          <h2>{movie.Title}</h2>
-        </div>
-      ))}
+      <Movie moviesList={moviesList} movieDetails={movieDetails} />
     </>
   );
 };
