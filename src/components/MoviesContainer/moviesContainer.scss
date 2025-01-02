@@ -1,14 +1,37 @@
 .movie-container {
   text-align: center;
-  background-color: beige;
   margin: 2rem 0;
-  padding: 2rem 0;
+  border-bottom: 1px solid black;
+
+  & .img-holder {
+    &__img {
+      width: 27rem;
+      border-radius: 3px;
+    }
+  }
+
+  &__details {
+    font-size: 1.8rem;
+    margin: 0 auto;
+    width: 80%;
+    text-align: left;
+
+    & > h2 {
+      margin: 1rem 0;
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    & p {
+      margin: 1rem 0;
+    }
+  }
 }
 
 .input-container {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 40rem;
   margin: 0 auto;
 
   img {
@@ -26,7 +49,7 @@
     margin-bottom: 2rem;
     margin-left: 3rem;
     padding: 1rem 1rem;
-    padding-left: 30px;
+    padding-left: 4rem;
     width: 60%;
     &::placeholder {
       text-align: center;
