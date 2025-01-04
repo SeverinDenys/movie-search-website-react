@@ -1,10 +1,29 @@
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
+
 const Movie = ({ moviesList }) => {
+  const [selectedMovie, setSelectedMovie] = useState([]); // New state for tracking selected movie
+
+  function showMovieIsPicked(pickedMovie) {
+    setSelectedMovie(pickedMovie);
+    console.log(pickedMovie);
+  }
+
   return (
     <>
-      {moviesList.map((movie, index) => (
-        <div key={index} className="movie-container">
+      {moviesList.map((movie) => (
+        <div
+          key={movie.imdbID}
+          className="movie-container"
+          onClick={() => showMovieIsPicked(movie)}
+          style={{
+            backgroundColor:
+              selectedMovie?.imdbID === movie.imdbID
+                ? "gold"
+                : "transparent",
+          }}
+        >
           <div className="img-holder">
             <img
               src={movie.Poster}
