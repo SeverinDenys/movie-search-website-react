@@ -6,8 +6,8 @@ const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
 
 const MoviesContainer = () => {
   const [moviesList, setMoviesList] = useState([]);
-
   const [inputValue, setInputValue] = useState("");
+  const [selectedMovie, setSelectedMovie] = useState([]); // N
 
   const fetchMoviesData = async () => {
     try {
@@ -90,7 +90,11 @@ const MoviesContainer = () => {
         fetchMoviesData={fetchMoviesData}
       />
 
-      <Movie moviesList={moviesList} />
+      <Movie
+        moviesList={moviesList}
+        selectedMovie={selectedMovie}
+        setSelectedMovie={setSelectedMovie}
+      />
     </>
   );
 };
