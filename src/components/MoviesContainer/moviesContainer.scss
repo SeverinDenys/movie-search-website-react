@@ -60,3 +60,17 @@
     padding: 1rem 1rem;
   }
 }
+
+.icon-container {
+  margin: 2rem 0;
+  padding: 1rem 0;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  & p {
+    font-size: 2rem;
+    padding-left: 1rem;
+  }
+}

@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
+import addIcon from "../../images/add.png";
+import { Link } from "react-router-dom";
 
-import { useState } from "react";
-
-const Movie = ({ moviesList }) => {
-  const [selectedMovie, setSelectedMovie] = useState([]); // New state for tracking selected movie
-
+const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
   function showMovieIsPicked(pickedMovie) {
     setSelectedMovie(pickedMovie);
     console.log(pickedMovie);
   }
+
+  const addToMyWatchList = (movieInfo) => {
+    console.log(movieInfo);
+  };
 
   return (
     <>
@@ -18,6 +20,7 @@ const Movie = ({ moviesList }) => {
           className="movie-container"
           onClick={() => showMovieIsPicked(movie)}
           style={{
+            /// how i change the style depending on the condition
             backgroundColor:
               selectedMovie?.imdbID === movie.imdbID
                 ? "gold"
@@ -38,6 +41,16 @@ const Movie = ({ moviesList }) => {
             <p>Year: {movie.Year}</p>
             <p>Rating: {movie.imdbRating}</p>
           </div>
+
+          <Link to="/myWatchList/">
+            <div
+              className="icon-container"
+              onClick={addToMyWatchList(movie)}
+            >
+              <img src={addIcon} alt="add icon" />
+              <p>Watchlist</p>
+            </div>
+          </Link>
         </div>
       ))}
     </>
