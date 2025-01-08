@@ -1,17 +1,31 @@
 /* eslint-disable react/prop-types */
 import addIcon from "../../images/add.png";
-import { Link } from "react-router-dom";
 
 const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
   function showMovieIsPicked(pickedMovie) {
     setSelectedMovie(pickedMovie);
-    // console.log(pickedMovie);
   }
 
-  //// use localstorage - save it inside to localstorage and then in mywatchlist retrieve data from localStorage 
+  //// use localstorage - save it inside to localstorage and then in mywatchlist retrieve data from localStorage
 
   const addToMyWatchList = (movieInfo) => {
-    console.log(movieInfo);
+    const existingMovies =
+      JSON.parse(localStorage.getItem("savedMovies")) || [];
+
+    //// check if movie is already saved in watchlist
+    const isAlreadySaved = existingMovies.some(
+      (movie) => movie.imdbID === movieInfo.imdbID
+    );
+
+    if (!isAlreadySaved) {
+      const updatedMovies = [...existingMovies, movieInfo];
+      localStorage.setItem(
+        "savedMovies",
+        JSON.stringify(updatedMovies)
+      );
+    } else {
+      alert("movie is already in your watchlist.");
+    }
   };
 
   return (
@@ -44,15 +58,13 @@ const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
             <p>Rating: {movie.imdbRating}</p>
           </div>
 
-          <Link to="/myWatchList/">
-            <div
-              className="icon-container"
-              onClick={() => addToMyWatchList(movie)}
-            >
-              <img src={addIcon} alt="add icon" />
-              <p>Watchlist</p>
-            </div>
-          </Link>
+          <div
+            className="icon-container"
+            onClick={() => addToMyWatchList(movie)}
+          >
+            <img src={addIcon} alt="add icon" />
+            <p>Watchlist</p>
+          </div>
         </div>
       ))}
     </>
