@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import Movie from "../Movie/Movie";
 import Input from "./Input";
+import exploreIcon from "../../images/exploreIcon.png";
 
 const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
 
 const MoviesContainer = () => {
   const [moviesList, setMoviesList] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [selectedMovie, setSelectedMovie] = useState([]); // N
+  const [selectedMovie, setSelectedMovie] = useState([]);
 
   const fetchMoviesData = async () => {
     try {
@@ -79,7 +80,12 @@ const MoviesContainer = () => {
   }, []);
 
   const handleInputValue = (e) => {
-    setInputValue(e.target.value);
+    const value = e.target.value;
+    // allow only alphanumeric character (letters and numbers) Any characters not matching the regex (e.g., @, #, $, !) will not be reflected in the input field.
+    const regex = /^[a-zA-Z0-9 ]*$/;
+    if (regex.test(value)) {
+      setInputValue(value);
+    }
   };
 
   return (
@@ -89,6 +95,15 @@ const MoviesContainer = () => {
         handleInputValue={handleInputValue}
         fetchMoviesData={fetchMoviesData}
       />
+
+      {moviesList.length === 0 && (
+        <>
+          <div className="explore-container">
+            <img src={exploreIcon} alt="explore icon" />
+            <h2>Start exploring</h2>
+          </div>
+        </>
+      )}
 
       <Movie
         moviesList={moviesList}

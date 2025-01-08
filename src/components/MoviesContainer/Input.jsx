@@ -12,11 +12,13 @@ const Input = ({ inputValue, handleInputValue, fetchMoviesData }) => {
       <div className="input-container">
         <img src="/src/images/searchIcon.png" alt="search icon" />
         <input
+          required
           type="text"
           placeholder="Search for a movie"
           value={inputValue}
           onChange={handleInputValue}
         />
+
         <button type="submit">Search</button>
       </div>
     </form>

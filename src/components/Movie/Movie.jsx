@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
   function showMovieIsPicked(pickedMovie) {
     setSelectedMovie(pickedMovie);
-    console.log(pickedMovie);
+    // console.log(pickedMovie);
   }
+
+  //// use localstorage - save it inside to localstorage and then in mywatchlist retrieve data from localStorage 
 
   const addToMyWatchList = (movieInfo) => {
     console.log(movieInfo);
@@ -45,7 +47,7 @@ const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
           <Link to="/myWatchList/">
             <div
               className="icon-container"
-              onClick={addToMyWatchList(movie)}
+              onClick={() => addToMyWatchList(movie)}
             >
               <img src={addIcon} alt="add icon" />
               <p>Watchlist</p>
