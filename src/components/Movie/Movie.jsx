@@ -4,6 +4,7 @@ import addIcon from "../../images/add.png";
 const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
   function showMovieIsPicked(pickedMovie) {
     setSelectedMovie(pickedMovie);
+    console.log(pickedMovie);
   }
 
   //// use localstorage - save it inside to localstorage and then in mywatchlist retrieve data from localStorage
@@ -28,6 +29,9 @@ const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
     }
   };
 
+  const existingMovies =
+    JSON.parse(localStorage.getItem("savedMovies")) || [];
+
   return (
     <>
       {moviesList.map((movie) => (
@@ -39,7 +43,7 @@ const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
             /// how i change the style depending on the condition
             backgroundColor:
               selectedMovie?.imdbID === movie.imdbID
-                ? "gold"
+                ? "lightyellow"
                 : "transparent",
           }}
         >
@@ -53,9 +57,10 @@ const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
 
           <div className="movie-container__details">
             <h2>{movie.Title}</h2>
+            <h3>{movie.Runtime}</h3>
+            <p>{movie.Genre}</p>
+            <p>⭐{movie.imdbRating}</p>
             <p>{movie.Plot}</p>
-            <p>Year: {movie.Year}</p>
-            <p>Rating: {movie.imdbRating}</p>
           </div>
 
           <div
@@ -63,7 +68,13 @@ const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
             onClick={() => addToMyWatchList(movie)}
           >
             <img src={addIcon} alt="add icon" />
-            <p>Watchlist</p>
+            <p>
+              {existingMovies.some(
+                (movieList) => movieList.imdbID === movie.imdbID
+              )
+                ? "Added"
+                : "Watchlist"}{" "}
+            </p>
           </div>
         </div>
       ))}
