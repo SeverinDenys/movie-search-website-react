@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import searchIcon from "../../images/searchIcon.png";
 
 const Input = ({ inputValue, handleInputValue, fetchMoviesData }) => {
   return (
@@ -10,7 +11,7 @@ const Input = ({ inputValue, handleInputValue, fetchMoviesData }) => {
       }}
     >
       <div className="input-container">
-        <img src="/src/images/searchIcon.png" alt="search icon" />
+        <img src={searchIcon} alt="search icon" />
         <input
           required
           type="text"
