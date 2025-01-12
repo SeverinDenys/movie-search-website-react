@@ -99,7 +99,7 @@ const MoviesContainer = () => {
       {moviesList.length === 0 && (
         <>
           <div className="explore-container">
-            <img src={exploreIcon} alt="explore icon" />
+            <img  src={exploreIcon} alt="explore icon" />
             <h2>Start exploring</h2>
           </div>
         </>

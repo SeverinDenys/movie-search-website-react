@@ -1,12 +1,28 @@
 .movie-container {
   text-align: center;
   margin: 2rem 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid grey;
+
+  @media (min-width: 768px) {
+    display: flex;
+    max-width: 70rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid grey;
+  }
 
   & .img-holder {
     &__img {
+      margin-top: 1.5rem;
       width: 27rem;
       border-radius: 3px;
+      @media (min-width: 768px) {
+        display: block;
+        margin-top: 0;
+        border-radius: 0;
+      }
     }
   }
 
@@ -14,16 +30,19 @@
     font-size: 1.8rem;
     margin: 0 auto;
     width: 80%;
-    text-align: left;
+    text-align: center;
 
     & > h2 {
       margin: 1rem 0;
       font-size: 3rem;
       text-align: center;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
     }
 
     & p {
       margin: 1rem 0;
+      text-align: left;
     }
   }
 }
@@ -45,8 +64,8 @@
   }
 
   input {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
     margin-left: 3rem;
     padding: 1rem 1rem;
     padding-left: 4rem;
@@ -58,6 +77,9 @@
 
   button {
     padding: 1rem 1rem;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
   }
 }
 
@@ -65,10 +87,15 @@
   margin: 2rem 0;
   padding: 1rem 0;
   display: flex;
-
   justify-content: center;
   align-items: center;
 
+  @media (min-width: 768px) {
+    margin: 0;
+  }
+  & img {
+    cursor: pointer;
+  }
   & p {
     font-size: 2rem;
     padding-left: 1rem;
@@ -80,5 +107,11 @@
   img,
   h2 {
     margin-top: 2rem;
+  }
+  @media (min-width: 768px) {
+    font-size: 2rem;
+    img {
+      width: 10rem;
+    }
   }
 }
