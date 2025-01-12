@@ -55,26 +55,29 @@ const Movie = ({ moviesList, selectedMovie, setSelectedMovie }) => {
             />
           </div>
 
-          <div className="movie-container__details">
-            <h2>{movie.Title}</h2>
-            <h3>{movie.Runtime}</h3>
-            <p>{movie.Genre}</p>
-            <p>⭐{movie.imdbRating}</p>
-            <p>{movie.Plot}</p>
-          </div>
+          <div>
+            <div className="movie-container__details">
+              <h2>{movie.Title}</h2>
+              <h3>{movie.Runtime}</h3>
+              <p>{movie.Genre}</p>
+              <p>⭐{movie.imdbRating}</p>
+              <p>{movie.Plot}</p>
+            </div>
 
-          <div
-            className="icon-container"
-            onClick={() => addToMyWatchList(movie)}
-          >
-            <img src={addIcon} alt="add icon" />
-            <p>
-              {existingMovies.some(
-                (movieList) => movieList.imdbID === movie.imdbID
-              )
-                ? "Added"
-                : "Watchlist"}{" "}
-            </p>
+            <div className="icon-container">
+              <img 
+                src={addIcon}
+                alt="add icon"
+                onClick={() => addToMyWatchList(movie)}
+              />
+              <p>
+                {existingMovies.some(
+                  (movieList) => movieList.imdbID === movie.imdbID
+                )
+                  ? "Added"
+                  : "Watchlist"}{" "}
+              </p>
+            </div>
           </div>
         </div>
       ))}

@@ -30,9 +30,11 @@ const MyWatchList = () => {
       <div className="myWatchList-container">
         {watchList.length === 0 ? (
           <>
-            <p>No movies in your watchlist yet.</p>
+            <p className="noMovies-text">
+              No movies in your watchlist yet.
+            </p>
             <Link to="/">
-              <div className="icon-container">
+              <div className="icon-container icon-container-empty">
                 <img src={addIcon} alt="add icon" />
                 <button onClick={() => navigate("/")}>
                   Let`s add some movies
@@ -44,19 +46,25 @@ const MyWatchList = () => {
           watchList.map((movie) => (
             <>
               <div key={movie.imdbID} className="movie-item">
-                <img src={movie.Poster} alt={movie.Title} />
-                <h2>{movie.Title}</h2>
-                <h3>{movie.Runtime}</h3>
-                <p>{movie.Genre}</p>
-                <p>⭐{movie.imdbRating}</p>
-                <p>{movie.Plot}</p>
-              </div>
-              <div
-                className="icon-container"
-                onClick={() => removeFromMyWatchList(movie)}
-              >
-                <img src={removeIcon} alt="remove icon" />
-                <p>Remove</p>
+                <div className="movie-item__img">
+                  <img src={movie.Poster} alt={movie.Title} />
+                </div>
+                <div>
+                  <div className="movie-item__desc">
+                    <h2>{movie.Title}</h2>
+                    <h3>{movie.Runtime}</h3>
+                    <p>{movie.Genre}</p>
+                    <p>⭐{movie.imdbRating}</p>
+                    <p>{movie.Plot}</p>
+                  </div>
+                  <div
+                    className="icon-container"
+                    onClick={() => removeFromMyWatchList(movie)}
+                  >
+                    <img src={removeIcon} alt="remove icon" />
+                    <p>Remove</p>
+                  </div>
+                </div>
               </div>
             </>
           ))
