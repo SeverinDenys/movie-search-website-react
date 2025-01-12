@@ -13,7 +13,7 @@ const MoviesContainer = () => {
   const fetchMoviesData = async () => {
     try {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&s=${inputValue}&type`
+        `https://www.omdbapi.com/?apikey=${apiKey}&s=${inputValue}&type`
       );
       if (!response.ok) {
         throw new Error("Network response was not okay");
@@ -41,7 +41,7 @@ const MoviesContainer = () => {
     const result = [];
     for (let movie of moviesArray) {
       const response = await fetch(
-        `http://www.omdbapi.com/?apikey=${apiKey}&t=${movie.Title}`
+        `https://www.omdbapi.com/?apikey=${apiKey}&t=${movie.Title}`
       );
       if (!response.ok) {
         throw new Error("Network response was not okay");
