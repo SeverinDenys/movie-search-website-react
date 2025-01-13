@@ -76,6 +76,8 @@
   }
 
   button {
+    -webkit-appearance: none;
+    border-radius: 0;
     padding: 1rem 1rem;
     font-family: "Montserrat", sans-serif;
     text-transform: uppercase;
